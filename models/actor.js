@@ -12,5 +12,5 @@ const Actor = db.define(
   }
   // { indexed: [{ unique: false, fields: ["name"] }] }
 );
-
+Actor.hasMany(Movie);
 module.exports = Actor;
