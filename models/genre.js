@@ -15,5 +15,5 @@ const Genre = db.define(
   }
 );
 
-Genre.hasMany(Movie);
+// Genre.hasMany(Movie);
 module.exports = Genre;
