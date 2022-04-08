@@ -19,7 +19,7 @@ const list = async (argv) => {
       for (let i = 0; i < movies.length; i++) {
         for (let j = 0; j < actors.length; j++) {
           console.log(
-            `the movie is ${movies[i].title} the actor is ${actors[j].name}`
+            `Movie: ${movies[i].title} Staring: ${actors[j].name} Rating: ${movies[i].rating}`
           );
         }
       }
@@ -31,7 +31,22 @@ const list = async (argv) => {
       console.log(`Actor: ${actor.name}`);
     }
   } else if (argv.movie) {
-    const movies = await Movie.findAll({});
+    const movies = await Movie.findAll({
+      // todo-
+      // include: [
+      //   { model: Actor, include: [Movie, Genre] },
+      //   {
+      //     model: Genre,
+      //     include: {
+      //       model: Movie,
+      //       include: {
+      //         model: Actor,
+      //         include: [Movie, Genre],
+      //       },
+      //     },
+      //   },
+      // ],
+    });
     for (movie of movies) {
       console.log(`Title: ${movie.title}`);
     }

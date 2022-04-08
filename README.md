@@ -22,3 +22,9 @@
 // -- --list --actor
 // -- --list --movie
 // -- --list --genre
+
+<!-- UPDATE -->
+
+<!-- UPDATE IN MOVIES -->
+
+//-- --update --key "title" --value "film name" --newValue "new name"
