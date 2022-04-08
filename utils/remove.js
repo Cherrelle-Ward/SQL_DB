@@ -5,44 +5,29 @@ const Actor = require("../models/actor");
 const Genre = require("../models/genre");
 const Movie = require("../models/movie");
 
-const Remove = async (argv) => {
+const Remove = async ({ Actor, Genre, Movie }) => {
   if (argv.movie) {
     const remove = await Movie.destroy({
       where: {
         title: argv.title,
       },
     });
-
-    const actor = await Actor.destroy({
+    console.log(`${remove} movie deleted`);
+  } else if (argv.actor) {
+    const remove = await Actor.destroy({
       where: {
         name: argv.name,
       },
     });
-    const genre = await Genre.destroy({
+    console.log(`${remove} actor deleted`);
+  } else if (argv.genre) {
+    const remove = await Genre.destroy({
       where: {
         category: argv.category,
       },
     });
-    console.log(remove, actor, genre);
+    console.log(`${remove} genre deleted`);
   }
-
-  // else if(argv.actor){
-  //     const remove = await Actor.destroy({
-  //         where: {
-  //             name: argv.name
-  //         }
-  //     })
-  //     console.log(remove);
-  // }
-
-  // else if(argv.genre){
-  //     const remove = await Genre.destroy({
-  //         where: {
-  //             category: argv.category
-  //         }
-  //     })
-  //     console.log(remove);
-  // }
 };
 
 module.exports = Remove;

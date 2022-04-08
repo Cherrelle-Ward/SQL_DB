@@ -3,33 +3,32 @@ require("dotenv").config();
 // const db = new Sequelize(process.env.MYSQL_URI);
 // console.log(process.env);
 const connection = require("./connection");
-
+// !yargs
 const yargs = require("yargs");
 const { hideBin } = require("yargs/helpers");
 const argv = yargs(hideBin(process.argv)).argv;
+
 const bcrypt = require("bcrypt");
 
 // !model connections
-const Genre = require("./models/genre");
-const Movie = require("./models/movie");
-const Actor = require("./models/actor");
+const { Genre, Movie, Actor } = require("./models/");
 
-// ! utils import
-const Add = require("./utils/add");
+//!Util Imports
+const add = require("./utils/add");
+const list = require("./utils/list");
+const Remove = require("./utils/remove");
+const Update = require("./utils/update");
 
 // our main function - using await keyword hence async
 (async () => {
-  await Genre.sync({ alter: true });
-  await Movie.sync({ alter: true });
-  await Actor.sync({ alter: true });
-
+  await connection.sync({ alter: true });
   //!Add
   if (argv.add) {
-    await Add(argv);
+    await add(argv);
   }
   //!List
   else if (argv.list) {
-    await List(argv);
+    await list(argv);
   }
   //!Remove
   else if (argv.remove) {
