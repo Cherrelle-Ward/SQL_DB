@@ -1,9 +1,7 @@
 const { sequelize } = "sequelize";
 require("../connection");
 const argv = require("yargs");
-const Actor = require("../models/actor");
-const Genre = require("../models/genre");
-const Movie = require("../models/movie");
+const { Actor, Movie, Genre } = require("../models/");
 
 const Remove = async ({ Actor, Genre, Movie }) => {
   if (argv.movie) {

@@ -1,21 +1,30 @@
 const { sequelize } = "sequelize";
 require("../connection");
 const argv = require("yargs");
-const Actor = require("../models/actor");
-const Genre = require("../models/genre");
-const Movie = require("../models/movie");
+const { Actor, Movie, Genre } = require("../models/");
 
 const Update = async (argv) => {
-  if (argv.update) {
-    const update = { [argv.key]: argv.value };
-    const updated = await Genre.update(
-      { [argv.key]: argv.newValue },
-      { where: { [argv.key]: argv.value } }
-    );
+  const updateMovie = await Movie.findOne({
+    where: { [argv.key]: argv.value },
+  });
+  try {
+    if (updateMovie) {
+      if (argv.update) {
+        const update = { [argv.key]: argv.value };
+        const updated = await Movie.update(
+          { [argv.key]: argv.newValue },
+          { where: { [argv.key]: argv.value } }
+        );
+        const newUpdate = { [argv.key]: argv.newValue };
 
-    console.log(updated);
-  } else {
-    console.log("nothing to update");
+        console.log(update, "Original");
+        console.log(newUpdate, "New Value");
+      }
+    } else if (!updateMovie) {
+      console.log("Movie not in system");
+    }
+  } catch (error) {
+    console.log(error);
   }
 };
 

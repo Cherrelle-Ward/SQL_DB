@@ -12,6 +12,7 @@ const add = async (argv) => {
       const genre = await Genre.create({ category: argv.category });
       const movie = await Movie.create({
         title: argv.title,
+        rating: argv.rating,
         GenreId: genre.id,
       });
       const actor = await movie.createActor({
@@ -25,6 +26,7 @@ const add = async (argv) => {
   } else if (foundGenre) {
     const movie = await Movie.create({
       title: argv.title,
+      rating: argv.rating,
       GenreId: foundGenre.id,
     });
     const actor = await movie.createActor({
